@@ -21,6 +21,7 @@ namespace PersonApi.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<PostgreSqlOptions>(Configuration.GetSection("PostgreSql"));
             services.AddControllers();
             services.AddApiVersioning(o =>
             {
@@ -29,7 +30,8 @@ namespace PersonApi.Web
                 o.DefaultApiVersion = new ApiVersion(1, 0);
             });
 
-            services.AddSingleton<IPersonRepository, FakePersonRepository>();
+            //services.AddSingleton<IPersonRepository, FakePersonRepository>();
+            services.AddScoped<IPersonRepository, PostgreSqlRepository>();
             services.AddScoped<PersonService>();
         }
 
