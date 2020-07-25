@@ -1,7 +1,7 @@
 namespace PersonApi.Web.Models
 {
     using System;
-    using System.Threading;
+    using System.ComponentModel.DataAnnotations;
 
     public class Person
     {
@@ -17,6 +17,7 @@ namespace PersonApi.Web.Models
 
         public Guid Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
     }
 }

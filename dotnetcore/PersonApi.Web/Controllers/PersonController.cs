@@ -20,12 +20,15 @@ namespace PersonApi.Web.Controllers
         }
 
         [HttpPost]
-        public async Task AddPerson([FromBody]Person person)
+        public async Task<ActionResult> AddPerson([FromBody]Person person)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await this.personService.AddPerson(person);
+                return BadRequest(ModelState);
             }
+            
+            await this.personService.AddPerson(person);
+            return Ok();
         }
         
         [HttpGet]
@@ -50,9 +53,15 @@ namespace PersonApi.Web.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task UpdatePerson(Guid id, [FromBody] Person newPerson)
+        public async Task<ActionResult> UpdatePerson(Guid id, [FromBody] Person newPerson)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
             await personService.UpdatePerson(id, newPerson);
+            return Ok();
         }
     }
 }
