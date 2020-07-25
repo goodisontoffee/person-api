@@ -1,0 +1,6 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/person_api
+    username: person_api
+    password: supersecret
+    pool-size: 30
